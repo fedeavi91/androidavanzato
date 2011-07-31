@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:hazam="http://hazam.com" android:orientation="vertical"
+	android:gravity="center" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<it.androidavanzato.ui.Knob android:id="@+id/the_knob"
+		android:layout_width="300dp" android:layout_height="300dp"
+		android:padding="50dp" hazam:maxRotation="320.0" hazam:minRotation="40.0" android:src="@drawable/knob" />
+	<ProgressBar android:id="@+id/progressBar"
+		android:layout_width="300dp" android:layout_height="wrap_content"
+		android:max="100"
+		style="?android:attr/progressBarStyleHorizontal" />
+</LinearLayout>

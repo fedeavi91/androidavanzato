@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:padding="40dp">
+    <LinearLayout 
+    	android:id="@+id/holder"
+    	android:clickable="true"
+    	android:layout_width="fill_parent"
+    	android:gravity="center"
+    	android:onClick="rotate"
+    	android:layout_height="fill_parent">
+    	<ImageView 
+    		android:id="@+id/elo"
+    		android:src="@drawable/elo"
+    		android:layout_width="200dp"
+    		android:layout_height="200dp"/>
+    	<ImageView 
+    		android:id="@+id/back"
+    		android:visibility="gone"
+    		android:src="@drawable/elo_back"
+    		android:layout_width="200dp"
+    		android:layout_height="200dp"/>
+    </LinearLayout>
+</LinearLayout>

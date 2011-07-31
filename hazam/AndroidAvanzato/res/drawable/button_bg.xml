@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/rounded_button_radius" />
+            <solid android:color="@color/dark_green" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:topLeftRadius="@dimen/rounded_button_radius"
+                android:topRightRadius="@dimen/rounded_button_radius" />
+            <gradient android:angle="270" 
+            	android:startColor="#00FFFFFF"
+                android:endColor="#77FFFFFF" android:type="linear" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/rounded_button_radius" />
+            <solid android:color="@android:color/transparent" />
+            <padding android:left="@dimen/rounded_button_padding" android:top="@dimen/rounded_button_padding"
+                android:right="@dimen/rounded_button_padding" android:bottom="@dimen/rounded_button_padding" />
+            <stroke android:width="2dp" android:color="@android:color/white" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,7 @@
+<resources>
+	<dimen name="rounded_button_radius">10dp</dimen>
+	<dimen name="rounded_button_padding">10dp</dimen>
+	<color name="dark_green">#068F28</color>
+	<dimen name="webcam_thumb_size">280dp</dimen>
+	<dimen name="webcam_thumb_rounded_corner">8dp</dimen>
+</resources>
