@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:hazam="http://hazam.com" android:orientation="vertical"
+	android:gravity="top|center_horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<LinearLayout android:layout_width="fill_parent"
+		android:orientation="horizontal" android:layout_height="wrap_content">
+		<Button android:text="Calculate" android:id="@+id/btn_calc"
+			android:onClick="calculate" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<EditText android:layout_height="wrap_content"
+			android:layout_width="0dp" android:id="@+id/argument"
+			android:layout_weight="1" android:maxLength="4" android:inputType="number"></EditText>
+		<Button android:text="Calculate Wrong" android:id="@+id/btn_calc_wrong"
+			android:onClick="calculateWrong" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	<EditText android:layout_height="wrap_content"
+		android:layout_width="match_parent" android:id="@+id/result"
+		android:maxLines="5" android:minLines="5" android:inputType="textMultiLine">
+	</EditText>
+	<ProgressBar style="?android:attr/progressBarStyleLarge"
+		android:id="@+id/progressBar1" android:layout_height="wrap_content"
+		android:layout_width="wrap_content"></ProgressBar>
+	<TextView
+		android:id="@+id/label" android:layout_height="wrap_content"
+		android:layout_width="wrap_content"/>
+
+</LinearLayout>

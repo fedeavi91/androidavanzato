@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:hazam="http://hazam.com" android:orientation="vertical"
+	android:gravity="center" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView
+		android:id="@+id/label"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:textStyle="bold" android:textSize="32dp"
+		android:text="ANDROID AVANZATO" />
+	<Button 
+		android:onClick="blink"
+		android:text="Blink"
+		android:layout_width="300dp" android:layout_height="wrap_content" />
+</LinearLayout>
