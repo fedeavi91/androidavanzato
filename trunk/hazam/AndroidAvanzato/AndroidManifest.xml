@@ -2,15 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="it.androidavanzato" android:versionCode="1"
 	android:versionName="1.0">
-	
-	
-	
-	
-	
 	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="11"/>
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:hardwareAccelerated="true" android:name=".RomaSkiApplication">
+		android:hardwareAccelerated="true" android:name=".AndroidAvanzatoApplication">
 		<activity android:name=".BookExamples"
 			android:alwaysRetainTaskState="true" android:label="@string/app_name">
 			<intent-filter>
@@ -18,11 +13,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".romaski.HomeActivity"
-	 android:theme="@style/RomaSki"/>
-		<activity android:name=".romaski.DetailActivity"
-			android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar">
-		</activity>
+		<activity android:name=".romaski.RomaSkiHoneycombActivity" android:theme="@style/RomaSki"/>
 		<activity android:name=".ui.NiceButton" />
 		<activity android:name=".ui.BitmapReflection" />
 		<activity android:name=".ui.ColorFilters" />
@@ -39,7 +30,7 @@
 		<service android:name=".ui.FactorialService" />
 		<activity android:name=".ui.BlinkingText" />
 	</application>
-	<uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission>
+	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

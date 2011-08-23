@@ -44,9 +44,6 @@ public class WebcamsFragment extends Fragment implements OnItemClickListener {
 			detailFrag.setTarget((Uri)mAdapter.getItem(pos));
 		} else {
 			//launch detail activity
-			Intent i = new Intent(getActivity(), DetailActivity.class);
-			i.putExtra(DetailActivity.EXTRA_URI, mAdapter.getItem(pos).toString());
-			startActivity(i);
 		}
 	}
 }
