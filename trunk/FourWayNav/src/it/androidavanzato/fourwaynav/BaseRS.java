@@ -11,6 +11,7 @@ import android.renderscript.ScriptC;
 
 public abstract class BaseRS<T extends ScriptC> {
 
+	
 	protected Resources mRes;
 	protected RenderScriptGL mRS;
 	protected T mScriptC;
