@@ -1,7 +1,7 @@
 package it.androidavanzato;
 
 
-import it.androidavanzato.romaski.HomeActivity;
+import it.androidavanzato.romaski.RomaSkiHoneycombActivity;
 import it.androidavanzato.ui.BitmapReflection;
 import it.androidavanzato.ui.BlinkingText;
 import it.androidavanzato.ui.ColorFilters;
@@ -22,7 +22,15 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
+/**
+ * Semplice Activity che realizza una lista che funga da menu principale
+ * per accedere ad una serei di Activity.
+ * In questo caso, ad ognuna corrisponde un esempio relativo a qualche
+ * capitolo del libro AndroidAvanzato 
+ * 
+ * @author Emanuele Di Saverio - emanuele.disaverio at gmail.com
+ *
+ */
 public class BookExamples extends ListActivity {
 	private ClassListAdapter mAdapter;
 	
@@ -36,7 +44,7 @@ public class BookExamples extends ListActivity {
 			KnobCustomViewActivity.class,
 			MessengerPipe.class,
 			BlinkingText.class,
-			HomeActivity.class
+			RomaSkiHoneycombActivity.class
 	};
 
 	@Override

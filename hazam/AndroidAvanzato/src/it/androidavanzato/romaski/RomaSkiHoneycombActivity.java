@@ -8,7 +8,7 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.Window;
 
-public class RomaSkiFragmentActivity extends Activity {
+public class RomaSkiHoneycombActivity extends Activity {
 	private final boolean isHoneycomb = android.os.Build.VERSION.SDK_INT > 10;
 
 	@Override
@@ -28,6 +28,7 @@ public class RomaSkiFragmentActivity extends Activity {
 			break;
 		}
 		getWindow().setFormat(PixelFormat.RGBA_8888);
+		setContentView(R.layout.home);
 	}
 
 	@Override

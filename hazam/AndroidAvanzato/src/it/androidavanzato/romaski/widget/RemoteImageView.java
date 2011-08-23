@@ -1,7 +1,7 @@
 package it.androidavanzato.romaski.widget;
 
+import it.androidavanzato.AndroidAvanzatoApplication;
 import it.androidavanzato.R;
-import it.androidavanzato.romaski.HandyApplication;
 import it.androidavanzato.romaski.fs.ImageCache;
 import it.androidavanzato.romaski.net.Base64;
 import it.androidavanzato.romaski.widget.DownloadTask.DownloadListener;
@@ -42,7 +42,7 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 	}
 
 	private void init(Context ctx) {
-		cache = (ImageCache) HandyApplication.getAppService(HandyApplication.IMAGE_CACHE_APPSERVICE);
+		cache = (ImageCache) AndroidAvanzatoApplication.getAppService(AndroidAvanzatoApplication.IMAGE_CACHE_APPSERVICE);
 		if (cache == null) {
 			throw new RuntimeException("No ImageCache service registered!");
 		}
