@@ -29,6 +29,7 @@
 		<activity android:name=".ui.MessengerPipe" />
 		<service android:name=".ui.FactorialService" />
 		<activity android:name=".ui.BlinkingText" />
+		<activity android:name=".ui.ModalTextEditHoneycombActivity" />
 	</application>
 	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
 	<uses-permission android:name="android.permission.INTERNET" />

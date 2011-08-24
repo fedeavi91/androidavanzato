@@ -15,16 +15,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 
-
 public class WebcamsFragment extends Fragment implements OnItemClickListener {
 	private AdapterView<BaseAdapter> mAdapterView;
 	private WebcamImagesAdapter mAdapter;
+
 	@Override
 	@SuppressWarnings("unchecked")
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		View toret = inflater.inflate(R.layout.webcams_list, container, true);
-		mAdapterView = (AdapterView<BaseAdapter>) toret.findViewById(R.id.webcams);
-		mAdapter = new WebcamImagesAdapter(getActivity(), Resort.CAMPO_FELICE.getId());
+		mAdapterView = (AdapterView<BaseAdapter>) toret
+				.findViewById(R.id.webcams);
+		mAdapter = new WebcamImagesAdapter(getActivity(),
+				Resort.CAMPO_FELICE.getId());
 		mAdapterView.setAdapter(mAdapter);
 		mAdapterView.setOnItemClickListener(this);
 		return toret;
@@ -36,14 +39,11 @@ public class WebcamsFragment extends Fragment implements OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> adapterView, View parent, int pos, long id) {
+	public void onItemClick(AdapterView<?> adapterView, View parent, int pos,
+			long id) {
 		FragmentManager fm = getActivity().getFragmentManager();
-		PinchableImageFragment detailFrag = (PinchableImageFragment) fm.findFragmentById(R.id.detail);
-		if (detailFrag != null) {
-			//detail fragment on screen, talk to him directly
-			detailFrag.setTarget((Uri)mAdapter.getItem(pos));
-		} else {
-			//launch detail activity
-		}
+		PinchableImageFragment detailFrag = (PinchableImageFragment) fm
+				.findFragmentById(R.id.detail);
+		detailFrag.setTarget((Uri) mAdapter.getItem(pos));
 	}
 }

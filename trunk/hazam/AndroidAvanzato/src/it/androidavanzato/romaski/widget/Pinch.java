@@ -47,8 +47,7 @@ public class Pinch {
 				list.matrix.postTranslate((imvW - newWidth) / 2, (imvH - newHeight) / 2);
 				iv.setImageMatrix(list.matrix);
 				log.d("ImageView: " + iv.getMeasuredWidth() + ", " + iv.getMeasuredHeight());
-				log.d("Bitmap: " + iv.getDrawable().getIntrinsicWidth() + ", " + iv.getDrawable().getIntrinsicHeight());
-				iv.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+				log.d("Bitmap: " + iv.getDrawable().getIntrinsicWidth() + ", " + iv.getDrawable().getIntrinsicHeight());				
 			}
 		});
 		// list.matrix.setScale(2.0f, 2.0f);

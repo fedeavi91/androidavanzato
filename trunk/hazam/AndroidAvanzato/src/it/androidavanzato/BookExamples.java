@@ -8,6 +8,7 @@ import it.androidavanzato.ui.ColorFilters;
 import it.androidavanzato.ui.KnobCustomViewActivity;
 import it.androidavanzato.ui.LongTask;
 import it.androidavanzato.ui.MessengerPipe;
+import it.androidavanzato.ui.ModalTextEditHoneycombActivity;
 import it.androidavanzato.ui.NiceButton;
 import it.androidavanzato.ui.Rotate;
 import it.androidavanzato.ui.Task1;
@@ -44,7 +45,8 @@ public class BookExamples extends ListActivity {
 			KnobCustomViewActivity.class,
 			MessengerPipe.class,
 			BlinkingText.class,
-			RomaSkiHoneycombActivity.class
+			RomaSkiHoneycombActivity.class,
+			ModalTextEditHoneycombActivity.class
 	};
 
 	@Override

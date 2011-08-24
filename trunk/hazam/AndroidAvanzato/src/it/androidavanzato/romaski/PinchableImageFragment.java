@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class PinchableImageFragment  extends Fragment {
+public class PinchableImageFragment extends Fragment {
 	
 	private RemoteImageView riw;
 	@Override
@@ -25,5 +25,9 @@ public class PinchableImageFragment  extends Fragment {
 		riw.setImageURI(object);
 		riw.netReload();
 		Pinch.makePinchable(riw);
+	}
+	
+	public void forceRelead() {
+		riw.netReload();
 	}
 }
