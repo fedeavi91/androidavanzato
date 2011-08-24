@@ -64,6 +64,7 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 	}
 
 	public void netReload() {
+		super.setImageResource(R.drawable.hourglass);
 		if (currentTask != null) {
 			if (currentTask.getStatus() != Status.FINISHED) {
 				// should we abort the currentTask? don'think so
@@ -98,6 +99,7 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 			trace("Found in cache!" + remoteUri);
 			Bitmap orig = cache.getBitmap(id);
 			setImageBitmap(orig);
+			forceLayout();
 		}
 	}
 
