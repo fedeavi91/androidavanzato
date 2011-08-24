@@ -2,6 +2,7 @@ package it.androidavanzato;
 
 
 import it.androidavanzato.romaski.RomaSkiHoneycombActivity;
+import it.androidavanzato.ui.AnimatorHoneycombActivity;
 import it.androidavanzato.ui.BitmapReflection;
 import it.androidavanzato.ui.BlinkingText;
 import it.androidavanzato.ui.ColorFilters;
@@ -46,7 +47,8 @@ public class BookExamples extends ListActivity {
 			MessengerPipe.class,
 			BlinkingText.class,
 			RomaSkiHoneycombActivity.class,
-			ModalTextEditHoneycombActivity.class
+			ModalTextEditHoneycombActivity.class,
+			AnimatorHoneycombActivity.class
 	};
 
 	@Override

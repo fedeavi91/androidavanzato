@@ -30,6 +30,7 @@
 		<service android:name=".ui.FactorialService" />
 		<activity android:name=".ui.BlinkingText" />
 		<activity android:name=".ui.ModalTextEditHoneycombActivity" />
+		<activity android:name=".ui.AnimatorHoneycombActivity" />
 	</application>
 	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
 	<uses-permission android:name="android.permission.INTERNET" />
