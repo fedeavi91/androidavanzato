@@ -90,6 +90,8 @@ public class ComplexAnimatorHoneycombActivity extends Activity {
 
 	public void animatePath(final View v) {
 
+		//vogliamo animare lungo il path in rapporto alla sua lunghezza lineare
+		//abbiamo bisogno di un oggetto PathMeasure
 		final PathMeasure pm = new PathMeasure(createPath(v), false);
 		float pathlength = pm.getLength();
 		ValueAnimator va = ValueAnimator.ofFloat(0.0f, pathlength);
@@ -100,6 +102,8 @@ public class ComplexAnimatorHoneycombActivity extends Activity {
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
 				float currDistance = (Float) animation.getAnimatedValue();
+				//PathMeasure ricava e coordinate di un punto nel path posto ad un certo livello di
+				//distanza lineare
 				pm.getPosTan(currDistance, pos, null);
 				v.setX(pos[0]);
 				v.setY(pos[1]);
