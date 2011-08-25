@@ -83,8 +83,7 @@ public class AnimatorHoneycombActivity extends Activity {
 		super.onPause();
 	}
 	
-	public void relayout(View v) {
-		decor.requestLayout();
+	public void reset(View v) {
 		mTextContrast.setTranslationX(0.0f);
 	}
 }
