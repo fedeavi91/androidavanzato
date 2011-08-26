@@ -5,6 +5,8 @@ import it.androidavanzato.R;
 import it.androidavanzato.romaski.fs.ImageCache;
 import it.androidavanzato.romaski.net.Base64;
 import it.androidavanzato.romaski.widget.DownloadTask.DownloadListener;
+import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -25,6 +27,7 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 	private Uri remoteUri = null;
 	private ImageCache cache;
 	private DownloadTask currentTask = null;
+	private LoaderManager loaderMan = null;
 
 	public RemoteImageView(Context context) {
 		super(context);
@@ -42,10 +45,14 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 	}
 
 	private void init(Context ctx) {
+		if (!Activity.class.isAssignableFrom(ctx.getClass())) {
+			throw new RuntimeException("We need an activity context!");
+		}
 		cache = (ImageCache) AndroidAvanzatoApplication.getAppService(AndroidAvanzatoApplication.IMAGE_CACHE_APPSERVICE);
 		if (cache == null) {
 			throw new RuntimeException("No ImageCache service registered!");
 		}
+		loaderMan = ((Activity) ctx).getLoaderManager();
 	}
 
 	private static void trace(String msg) {
