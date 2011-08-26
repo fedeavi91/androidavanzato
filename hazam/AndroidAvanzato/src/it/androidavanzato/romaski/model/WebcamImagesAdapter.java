@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class WebcamImagesAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Uri targetUri = (Uri) getItem(position);
-		System.out.println("Getting View for uri "+targetUri+", pos: "+position+", convert "+convertView);
+		Log.v("RemoteImageView", "Getting View for uri "+targetUri+", pos: "+position+", convert "+convertView);
 		RemoteImageView toret = null;
 		if (convertView == null) {
 			toret = (RemoteImageView) inflater.inflate(R.layout.adapter_item, parent, false);

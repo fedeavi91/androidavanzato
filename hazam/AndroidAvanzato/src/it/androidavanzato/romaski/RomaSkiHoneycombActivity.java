@@ -2,12 +2,17 @@ package it.androidavanzato.romaski;
 
 import it.androidavanzato.R;
 import it.androidavanzato.romaski.model.Resort;
-import it.androidavanzato.romaski.model.WebcamImagesAdapter;
+
+import java.util.HashMap;
+import java.util.Stack;
+
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentBreadCrumbs;
 import android.app.FragmentManager;
+import android.app.FragmentManager.OnBackStackChangedListener;
 import android.app.FragmentTransaction;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
@@ -15,7 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class RomaSkiHoneycombActivity extends Activity implements
-		ActionBar.TabListener {
+		ActionBar.TabListener, OnBackStackChangedListener {
+
+	private boolean updateingTab = true;
+
+	private final HashMap<String, Tab> mTagTagMap = new HashMap<String, Tab>();
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -23,14 +33,38 @@ public class RomaSkiHoneycombActivity extends Activity implements
 		setContentView(R.layout.home);
 
 		final ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle("HC Romaski");
-		actionBar.setSubtitle("App esempio a scopi didattici");
+		actionBar.setSubtitle("Applicazione d'esempio");
+
+		updateingTab = true;
 		for (Resort r : Resort.ALL.values()) {
-			actionBar.addTab(actionBar.newTab().setTag(r.getId())
-					.setIcon(r.getDrawableId())
-					.setTabListener(this));
+			Tab toadd = actionBar.newTab().setTag(r.getId())
+					.setIcon(r.getDrawableId()).setTabListener(this);
+			actionBar.addTab(toadd);
+			mTagTagMap.put(r.getId(), toadd);
 		}
+		switchToTab(Resort.CAMPO_FELICE.getId(), getFragmentManager()
+				.beginTransaction(), true);
+		updateingTab = false;
+
+		FragmentBreadCrumbs fbc = (FragmentBreadCrumbs) findViewById(R.id.bread_crumbs);
+		fbc.setActivity(this);
+
+		getFragmentManager().addOnBackStackChangedListener(this);
+	}
+
+	private void switchToTab(String tag, FragmentTransaction ft, boolean back) {
+		WebcamsFragment newWebFragment = new WebcamsFragment(tag);
+		ft = getFragmentManager().beginTransaction();
+		ft.setBreadCrumbTitle(tag);
+		ft.replace(R.id.container, newWebFragment, tag);
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		if (back) {
+			ft.addToBackStack(null);
+		}
+		ft.commit();
 	}
 
 	@Override
@@ -40,13 +74,11 @@ public class RomaSkiHoneycombActivity extends Activity implements
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		System.out.println("Selected " + tab.getTag());
-		String tag = (String) tab.getTag();
-		WebcamImagesAdapter adapter = new WebcamImagesAdapter(this, tag);
-		FragmentManager fm = getFragmentManager();
-		WebcamsFragment wf = (WebcamsFragment) fm
-				.findFragmentById(R.id.webcams);
-		wf.setAdapter(adapter);
+		if (!updateingTab) {
+			String tag = (String) tab.getTag();
+			System.out.println("onTabSelected " + tag);
+			switchToTab(tag, ft, true);
+		}
 	}
 
 	@Override
@@ -67,14 +99,31 @@ public class RomaSkiHoneycombActivity extends Activity implements
 			FragmentManager fm = getFragmentManager();
 			PinchableImageFragment detailFrag = (PinchableImageFragment) fm
 					.findFragmentById(R.id.detail);
-			detailFrag.forceRelead();
+			detailFrag.forceReload();
 			return true;
 		} else if (chosenItemId == R.id.about) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("RomaSki per Honeycomb")
 					.setMessage("Esempio a corredo del libro AndroidAvanzato")
 					.setPositiveButton("OK", null).show();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onBackStackChanged() {
+		if (getFragmentManager().getBackStackEntryCount() > 0) {
+			int lastPosition = getFragmentManager().getBackStackEntryCount() - 1;
+			String tag = ""
+					+ getFragmentManager().getBackStackEntryAt(lastPosition)
+							.getBreadCrumbTitle();
+			updateingTab = true;
+			getActionBar().selectTab(mTagTagMap.get(tag));
+			updateingTab = false;
+		} else {
+			finish();
+		}
 	}
 }
