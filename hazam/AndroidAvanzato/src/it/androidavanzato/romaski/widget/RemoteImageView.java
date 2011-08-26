@@ -110,7 +110,6 @@ public class RemoteImageView extends ImageView implements LoaderCallbacks<Uri> {
 		if (cache.hasEntryFor( id )) {
 			trace("--Found in cache!" + remoteUri);
 			Bitmap orig = cache.getBitmap(id);
-			trace("--"+this);
 			setImageBitmap(orig);
 			invalidate();
 		}
@@ -131,6 +130,7 @@ public class RemoteImageView extends ImageView implements LoaderCallbacks<Uri> {
 
 	@Override
 	public void onLoaderReset(Loader<Uri> uri) {
-		trace("o->nLoaderReset: " + uri);		
+		//callback nel caso in cui il Loader sia resettato nel mezzo della sua 
+		//esecuzione
 	}
 }

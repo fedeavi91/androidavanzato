@@ -12,25 +12,25 @@ import android.view.ViewGroup;
 
 public class PinchableImageFragment extends Fragment {
 
-	private RemoteImageView riw;
+	private RemoteImageView mRemoteImageView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		//riceviamo la URI come parametro del fragment
+		Uri targetUri = (Uri) getArguments().get("uri");
 		View toret = inflater.inflate(R.layout.pinchable_fragment, container,
 				false);
-		riw = (RemoteImageView) toret.findViewById(R.id.img);
-
-		Uri targetUri = (Uri) getArguments().get("uri");
-		riw.setImageURI(targetUri);
-		riw.netReload();
-		Pinch.makePinchable(riw);
+		mRemoteImageView = (RemoteImageView) toret.findViewById(R.id.img);
+		mRemoteImageView.setImageURI(targetUri);
+		mRemoteImageView.netReload();
+		Pinch.makePinchable(mRemoteImageView);
 		return toret;
 	}
 
 	public void forceReload() {
-		if (riw != null) {
-			riw.netReload();
+		if (mRemoteImageView != null) {
+			mRemoteImageView.netReload();
 		}
 	}
 }

@@ -1,8 +1,5 @@
 package it.androidavanzato.romaski.widget;
 
-import it.androidavanzato.romaski.gesture.ScaleGestureDetector;
-import it.androidavanzato.romaski.gesture.ScaleGestureDetector.OnScaleGestureListener;
-import it.androidavanzato.romaski.util.L;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
@@ -10,6 +7,8 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -18,7 +17,7 @@ import android.widget.ImageView.ScaleType;
 
 
 public class Pinch {
-	private static L log = new L("Pinch", Log.DEBUG);
+	private static String TAG = "Pinch";
 
 	public static void makePinchable(final ImageView iv) {
 		iv.setClickable(true);
@@ -46,8 +45,8 @@ public class Pinch {
 				float newWidth = ratioClosestToOne * bmpW;
 				list.matrix.postTranslate((imvW - newWidth) / 2, (imvH - newHeight) / 2);
 				iv.setImageMatrix(list.matrix);
-				log.d("ImageView: " + iv.getMeasuredWidth() + ", " + iv.getMeasuredHeight());
-				log.d("Bitmap: " + iv.getDrawable().getIntrinsicWidth() + ", " + iv.getDrawable().getIntrinsicHeight());				
+				Log.d(TAG, "ImageView: " + iv.getMeasuredWidth() + ", " + iv.getMeasuredHeight());
+				Log.d(TAG, "Bitmap: " + iv.getDrawable().getIntrinsicWidth() + ", " + iv.getDrawable().getIntrinsicHeight());				
 			}
 		});
 		iv.setImageMatrix(list.matrix);
@@ -111,7 +110,6 @@ public class Pinch {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			System.out.println("dis " + distanceX);
 			matrix.postTranslate(-distanceX, -distanceY);
 			target.setImageMatrix(matrix);
 			target.invalidate();
