@@ -1,6 +1,7 @@
 package it.androidavanzato;
 
 
+import it.androidavanzato.fourwaynav.NavActivity;
 import it.androidavanzato.romaski.RomaSkiHoneycombActivity;
 import it.androidavanzato.ui.AnimatorHoneycombActivity;
 import it.androidavanzato.ui.BitmapReflection;
@@ -50,7 +51,8 @@ public class BookExamples extends ListActivity {
 			RomaSkiHoneycombActivity.class,
 			ModalTextEditHoneycombActivity.class,
 			AnimatorHoneycombActivity.class,
-			ComplexAnimatorHoneycombActivity.class
+			ComplexAnimatorHoneycombActivity.class,
+			NavActivity.class
 	};
 
 	@Override
