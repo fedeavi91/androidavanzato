@@ -12,7 +12,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
-import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +23,8 @@ public class MessengerPipe extends Activity {
 	private Handler handler;
 	private Messenger messenger;
 	private Messenger service = null;
+	
+	private static final String TAG = "MessengerPipe";
 
 	private ServiceConnection conn = new ServiceConnection() {
 
@@ -34,7 +36,7 @@ public class MessengerPipe extends Activity {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder binder) {
 			service = new Messenger(binder);
-			System.out.println("Service Connected!");
+			Log.v(TAG, "Service Connected!");
 		}
 	};
 
@@ -46,11 +48,7 @@ public class MessengerPipe extends Activity {
 		result = (TextView) findViewById(R.id.result);
 		handler = new Handler() {
 			public void handleMessage(Message msg) {
-				System.out.println("heh " + SystemClock.elapsedRealtime());
-				// BigInteger res = new BigInteger(msg.obj.getData().getByteArray("result"));
-				// System.out.println("RETURNED " +res);
 				result.setText(msg.obj.toString());
-				// System.out.println("heh " +SystemClock.elapsedRealtime());
 			};
 		};
 		messenger = new Messenger(handler);

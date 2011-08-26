@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 
 public class FactorialService extends Service {
 	public static final String TAG = "messengerPipe";
@@ -42,7 +43,7 @@ public class FactorialService extends Service {
 	class FactorialHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
-			System.out.println("-------RECEIVED");
+			Log.v(TAG, "Ricevuto messaggio! "+msg.what);
 			switch (msg.what) {
 			case MSG_FACTORIAL:
 				Thread t = new Thread(new FactorialProcessor(msg));

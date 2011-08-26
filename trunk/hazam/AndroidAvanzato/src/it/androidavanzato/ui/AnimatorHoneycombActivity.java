@@ -68,7 +68,6 @@ public class AnimatorHoneycombActivity extends Activity {
 		int color = value << 16;
 		bkgColor = bkgColor & 0xFF00FFFF;
 		bkgColor = bkgColor | color;
-		System.out.println("bkgColor "+Integer.toHexString(bkgColor));
 		decor.setBackgroundColor(bkgColor);
 	}
 	

@@ -2,7 +2,6 @@ package it.androidavanzato.romaski.util;
 
 import it.androidavanzato.romaski.fs.FilesystemCache;
 import it.androidavanzato.romaski.net.Base64;
-import it.androidavanzato.romaski.net.BetterHttpClient;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +9,7 @@ import java.io.InputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
 import android.app.Activity;
@@ -18,11 +18,11 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.http.AndroidHttpClient;
 import android.util.Log;
 
 public class ImageDownloader extends AsyncTaskLoader<Uri> {
-	private static final BetterHttpClient httpClient = BetterHttpClient
-			.buildClient(null, false);
+	private static final HttpClient httpClient = AndroidHttpClient.newInstance("androidavanzato");
 
 	private Uri mTargetUri;
 	private FilesystemCache mCache;

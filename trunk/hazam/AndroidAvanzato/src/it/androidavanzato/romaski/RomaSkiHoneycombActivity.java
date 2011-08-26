@@ -4,7 +4,6 @@ import it.androidavanzato.R;
 import it.androidavanzato.romaski.model.Resort;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -14,7 +13,6 @@ import android.app.FragmentBreadCrumbs;
 import android.app.FragmentManager;
 import android.app.FragmentManager.OnBackStackChangedListener;
 import android.app.FragmentTransaction;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,32 +20,30 @@ import android.view.MenuItem;
 public class RomaSkiHoneycombActivity extends Activity implements
 		ActionBar.TabListener, OnBackStackChangedListener {
 
-	private boolean updateingTab = true;
-
+	private boolean mFromMachine = true;
 	private final HashMap<String, Tab> mTagTagMap = new HashMap<String, Tab>();
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		getWindow().setFormat(PixelFormat.RGBA_8888);
 		setContentView(R.layout.home);
 
 		final ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setTitle("HC Romaski");
 		actionBar.setSubtitle("Applicazione d'esempio");
 
-		updateingTab = true;
+		mFromMachine = true;
 		for (Resort r : Resort.ALL.values()) {
 			Tab toadd = actionBar.newTab().setTag(r.getId())
 					.setIcon(r.getDrawableId()).setTabListener(this);
 			actionBar.addTab(toadd);
 			mTagTagMap.put(r.getId(), toadd);
 		}
+		mFromMachine = false;
+		
 		switchToTab(Resort.CAMPO_FELICE.getId(), getFragmentManager()
 				.beginTransaction(), true);
-		updateingTab = false;
 
 		FragmentBreadCrumbs fbc = (FragmentBreadCrumbs) findViewById(R.id.bread_crumbs);
 		fbc.setActivity(this);
@@ -68,23 +64,17 @@ public class RomaSkiHoneycombActivity extends Activity implements
 	}
 
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		System.out.println("Reselected " + tab);
-	}
-
-	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		if (!updateingTab) {
+		if (!mFromMachine) {
 			String tag = (String) tab.getTag();
-			System.out.println("onTabSelected " + tag);
 			switchToTab(tag, ft, true);
 		}
 	}
-
+	
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		System.out.println("Unseselected " + tab);
-	}
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,9 +109,9 @@ public class RomaSkiHoneycombActivity extends Activity implements
 			String tag = ""
 					+ getFragmentManager().getBackStackEntryAt(lastPosition)
 							.getBreadCrumbTitle();
-			updateingTab = true;
+			mFromMachine = true;
 			getActionBar().selectTab(mTagTagMap.get(tag));
-			updateingTab = false;
+			mFromMachine = false;
 		} else {
 			finish();
 		}
