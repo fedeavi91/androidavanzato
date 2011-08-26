@@ -48,7 +48,7 @@ public class ImageCache extends FilesystemCache {
 		Log.v(TAG, msg);
 	}
 
-	private Bitmap loadFromDisk(String name) throws FileNotFoundException {
+	private synchronized Bitmap loadFromDisk(String name) throws FileNotFoundException {
 		Bitmap loaded = null;
 		if ( onLoadFilter == null) {
 			loaded = BitmapFactory.decodeStream(loadInputStream(name));
@@ -66,10 +66,12 @@ public class ImageCache extends FilesystemCache {
 			try {
 				loaded = loadFromDisk(name);
 			} catch (FileNotFoundException fnfe) {
+				fnfe.printStackTrace();
 			}
 		} else {
 			trace(name + "image found in soft cache!");
 		}
+		trace("got bitmap: "+loaded);
 		return loaded;
 	}
 
@@ -82,7 +84,7 @@ public class ImageCache extends FilesystemCache {
 
 
 	@Override
-	public void save(String name, InputStream src) throws IOException {
+	public synchronized void save(String name, InputStream src) throws IOException {
 		File file = targetFileFor(name);
 		File temp = File.createTempFile("FSCACHE", null, root);
 		FileOutputStream output = new FileOutputStream(temp);

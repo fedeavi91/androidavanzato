@@ -1,11 +1,11 @@
 package it.androidavanzato.romaski.widget;
 
-import it.androidavanzato.romaski.BoundedLIFOExecutor;
 import it.androidavanzato.romaski.fs.FileUtils;
 import it.androidavanzato.romaski.fs.FilesystemCache;
 import it.androidavanzato.romaski.net.Base64;
 import it.androidavanzato.romaski.net.BetterHttpClient;
 import it.androidavanzato.romaski.os.ManagedAsyncTask;
+import it.androidavanzato.romaski.util.BoundedLIFOExecutor;
 
 import java.io.IOException;
 import java.io.InputStream;

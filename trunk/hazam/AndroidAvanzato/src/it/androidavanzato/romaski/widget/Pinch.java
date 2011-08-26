@@ -27,8 +27,8 @@ public class Pinch {
 		iv.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
 			public void onGlobalLayout() {
-				float imvH = iv.getMeasuredHeight();
-				float imvW = iv.getMeasuredWidth();
+				float imvH = iv.getMeasuredHeight() - iv.getPaddingTop() - iv.getPaddingBottom();
+				float imvW = iv.getMeasuredWidth() - iv.getPaddingLeft() - iv.getPaddingRight();
 				Drawable bitmap = iv.getDrawable();
 				float bmpH = bitmap.getIntrinsicHeight();
 				float bmpW = bitmap.getIntrinsicWidth();
@@ -50,8 +50,6 @@ public class Pinch {
 				log.d("Bitmap: " + iv.getDrawable().getIntrinsicWidth() + ", " + iv.getDrawable().getIntrinsicHeight());				
 			}
 		});
-		// list.matrix.setScale(2.0f, 2.0f);
-		// list.matrix.preTranslate(90.0f, 0.0f);
 		iv.setImageMatrix(list.matrix);
 
 		iv.setOnTouchListener(list);
@@ -76,7 +74,6 @@ public class Pinch {
 
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			log.d("onTouch");
 			boolean consumed = scrollgd.onTouchEvent(event);
 			consumed |= scalegd.onTouchEvent(event);
 			return consumed;
@@ -84,7 +81,6 @@ public class Pinch {
 
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
-			System.out.println("onScale");
 			matrix.postScale(detector.getScaleFactor(), detector.getScaleFactor(), detector.getFocusX(),
 					detector.getFocusY());
 			target.setImageMatrix(matrix);
@@ -94,31 +90,24 @@ public class Pinch {
 
 		@Override
 		public boolean onScaleBegin(ScaleGestureDetector detector) {
-			System.out.println("onScaleBegin");
 			return true;
 		}
 
 		@Override
-		public void onScaleEnd(ScaleGestureDetector detector) {
-		}
+		public void onScaleEnd(ScaleGestureDetector detector) {}
 
 		@Override
 		public boolean onDown(MotionEvent e) {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
-		public void onLongPress(MotionEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void onLongPress(MotionEvent e) {}
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
@@ -130,14 +119,10 @@ public class Pinch {
 		}
 
 		@Override
-		public void onShowPress(MotionEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void onShowPress(MotionEvent e) {}
 
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 	}

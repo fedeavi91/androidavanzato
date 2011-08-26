@@ -4,13 +4,19 @@ import it.androidavanzato.AndroidAvanzatoApplication;
 import it.androidavanzato.R;
 import it.androidavanzato.romaski.fs.ImageCache;
 import it.androidavanzato.romaski.net.Base64;
-import it.androidavanzato.romaski.widget.DownloadTask.DownloadListener;
+import it.androidavanzato.romaski.util.ImageDownloader;
+
+import java.util.concurrent.atomic.AtomicInteger;
+
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.Loader;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.net.Uri;
-import android.os.AsyncTask.Status;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
@@ -19,15 +25,14 @@ import android.widget.ImageView;
 /**
  * Extended ImageView to handle http:// loading of the images. Includes caching on SDCARD (if available)
  * 
- * @author Emanuele Di Saverio
  */
-public class RemoteImageView extends ImageView implements DownloadListener {
+public class RemoteImageView extends ImageView implements LoaderCallbacks<Uri> {
 
 	private static final String TAG = "RemoteImageView";
 	private Uri remoteUri = null;
 	private ImageCache cache;
-	private DownloadTask currentTask = null;
 	private LoaderManager loaderMan = null;
+	private ImageDownloader loader = null;
 
 	public RemoteImageView(Context context) {
 		super(context);
@@ -69,20 +74,21 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 			super.setImageURI(uri);
 		}
 	}
+	
+	static AtomicInteger id = new AtomicInteger(0);
 
 	public void netReload() {
 		super.setImageResource(R.drawable.hourglass);
-		if (currentTask != null) {
-			if (currentTask.getStatus() != Status.FINISHED) {
-				// should we abort the currentTask? don'think so
+		if (loader != null) {
+			if (loader.isStarted()) {
+				loader.cancelLoad();
 			}
-			currentTask.removeListener(this);
-			currentTask = null;
+			loader = null;
 		}
-		currentTask = new DownloadTask(getContext(), remoteUri, cache);
-		currentTask.addListener(this);
-		trace("Start download for: " + remoteUri);
-		currentTask.executeManaged();
+		setImageFromCache();
+		int loaderId = id.getAndIncrement();
+		loader = (ImageDownloader) loaderMan.initLoader(loaderId, null, this);		
+		trace("Start download id["+loaderId+"] for: " + remoteUri);
 	}
 
 	public void cacheReload() {
@@ -90,35 +96,41 @@ public class RemoteImageView extends ImageView implements DownloadListener {
 			return;
 		}
 		setImageFromCache();
-		trace("currentTask "+currentTask);
-		if (currentTask == null) {
-			currentTask = DownloadTask.retrievePending(remoteUri);
-			if (currentTask != null) {
-				currentTask.addListener(this);
-			}
-			trace("pending "+currentTask+ " listener "+this);
-		}
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		trace("onDrawCalled "+this+" "+remoteUri);
+		super.onDraw(canvas);
 	}
 	
 	private void setImageFromCache() {
+		if (remoteUri == null) return;
 		String id = Base64.encodeToString(remoteUri.toString().getBytes(), Base64.DEFAULT);
 		if (cache.hasEntryFor( id )) {
-			trace("Found in cache!" + remoteUri);
+			trace("--Found in cache!" + remoteUri);
 			Bitmap orig = cache.getBitmap(id);
+			trace("--"+this);
 			setImageBitmap(orig);
-			forceLayout();
+			invalidate();
 		}
 	}
 
 	@Override
-	public void onResourceUpdate(Uri uri) {
-		trace("RESOURCE IS DOWNLOADED " + uri);
+	public Loader<Uri> onCreateLoader(int id, Bundle args) {
+		trace("->onCreateLoader");	
+		ImageDownloader loader = new ImageDownloader(getContext(), remoteUri, cache);
+		return loader;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Uri> arg0, Uri uri) {		
+		trace("onLoadFinished: RESOURCE IS DOWNLOADED " + uri);
 		setImageFromCache();
 	}
 
 	@Override
-	public void onError(Throwable e) {
-		// TODO Auto-generated method stub
-
+	public void onLoaderReset(Loader<Uri> uri) {
+		trace("o->nLoaderReset: " + uri);		
 	}
 }

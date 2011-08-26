@@ -1,4 +1,4 @@
-package it.androidavanzato.romaski;
+package it.androidavanzato.romaski.util;
 
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

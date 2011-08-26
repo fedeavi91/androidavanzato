@@ -3,6 +3,7 @@
 	android:id="@android:id/tabhost" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<it.androidavanzato.romaski.widget.RemoteImageView
+		android:padding="20dp"
 		android:id="@+id/img" android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 </FrameLayout>
