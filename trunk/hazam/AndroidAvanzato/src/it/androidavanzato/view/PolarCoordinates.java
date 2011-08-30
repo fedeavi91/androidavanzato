@@ -1,5 +1,6 @@
 package it.androidavanzato.view;
 
+import it.androidavanzato.R;
 import android.animation.FloatEvaluator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -79,6 +80,7 @@ public class PolarCoordinates {
 		@Override
 		public Object evaluate(float fraction, Object startValue,
 				Object endValue) {
+			
 			PolarCoordinates from = (PolarCoordinates) startValue;
 			PolarCoordinates to = (PolarCoordinates) endValue;
 

@@ -89,7 +89,9 @@ public class RomaSkiHoneycombActivity extends Activity implements
 			FragmentManager fm = getFragmentManager();
 			PinchableImageFragment detailFrag = (PinchableImageFragment) fm
 					.findFragmentById(R.id.detail);
-			detailFrag.forceReload();
+			if (detailFrag != null) {
+				detailFrag.forceReload();
+			}
 			return true;
 		} else if (chosenItemId == R.id.about) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
