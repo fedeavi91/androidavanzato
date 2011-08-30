@@ -13,8 +13,7 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".romaski.RomaSkiHoneycombActivity" android:theme="@style/RomaSki"
-		android:screenOrientation="landscape"/>
+		<activity android:name=".romaski.RomaSkiHoneycombActivity" android:theme="@style/RomaSki"/>
 		<activity android:name=".ui.NiceButton" />
 		<activity android:name=".ui.BitmapReflection" />
 		<activity android:name=".ui.ColorFilters" />

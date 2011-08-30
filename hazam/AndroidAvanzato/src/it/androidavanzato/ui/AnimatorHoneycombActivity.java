@@ -83,6 +83,6 @@ public class AnimatorHoneycombActivity extends Activity {
 	}
 	
 	public void reset(View v) {
-		mTextContrast.setTranslationX(0.0f);
+		mTextContrast.setX(0.0f);
 	}
 }

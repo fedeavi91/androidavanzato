@@ -47,7 +47,8 @@ public class ComplexAnimatorHoneycombActivity extends Activity {
 		PropertyValuesHolder pvh = PropertyValuesHolder.ofKeyframe("x",
 				Keyframe.ofFloat(0f, v.getLeft() + FIRST_RADIUS),
 				Keyframe.ofFloat(0.3f, 0.9f * FINAL_X),
-				Keyframe.ofFloat(0.6f, FINAL_X), Keyframe.ofFloat(1f, FINAL_X));
+				Keyframe.ofFloat(0.6f, FINAL_X), 
+				Keyframe.ofFloat(1f, FINAL_X));
 		ObjectAnimator animX = ObjectAnimator.ofPropertyValuesHolder(v, pvh);
 		ObjectAnimator animY = ObjectAnimator.ofFloat(v, "y", centerY
 				- SECOND_RADIUS);
