@@ -18,49 +18,65 @@ package it.androidavanzato.fourwaynav;
 
 import it.androidavanzato.R;
 import it.androidavanzato.fourwaynav.FourWayNavView.Roll;
+import it.androidavanzato.view.SwipeDetector;
+import it.androidavanzato.view.SwipeDetector.Listener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class NavActivity extends Activity {
 
-    private FourWayNavView mView;
+	private FourWayNavView mView;
 
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        setContentView(R.layout.fourway);
-        mView = (FourWayNavView) findViewById(R.id.fourway);
-    }
+	@Override
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
+		setContentView(R.layout.fourway);
+		mView = (FourWayNavView) findViewById(R.id.fourway);
+		mView.setOnTouchListener(new SwipeDetector(new Listener() {
 
-    // Ideally an app should implement onResume() and onPause()
-    // to take appropriate action when the activity loses focus
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mView.resume();
-    }
+			@Override
+			public void onSwipeUp() {
+				mView.roll(Roll.DOWN);
+				Toast.makeText(NavActivity.this, "onSwipeUp",
+						Toast.LENGTH_SHORT).show();
+			}
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mView.pause();
-    }
+			@Override
+			public void onSwipeRight() {
+				mView.roll(Roll.LEFT);
+				Toast.makeText(NavActivity.this, "onSwipeRight",
+						Toast.LENGTH_SHORT).show();
+			}
 
-    public void left(View v) {
-    	mView.rollLeft();
-    }
-    
-    public void up(View v) {
-    	mView.roll(Roll.UP);
-    }
-    
-    public void down(View v) {
-    	mView.roll(Roll.DOWN);
-    }
-    
-    public void right(View v) {
-    	mView.roll(Roll.DOWN);
-    }
+			@Override
+			public void onSwipeLeft() {
+				mView.roll(Roll.RIGHT);
+				Toast.makeText(NavActivity.this, "onSwipeLeft",
+						Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onSwipeDown() {
+				mView.roll(Roll.UP);
+				Toast.makeText(NavActivity.this, "onSwipeDown",
+						Toast.LENGTH_SHORT).show();
+			}
+		}));
+	}
+
+	// Ideally an app should implement onResume() and onPause()
+	// to take appropriate action when the activity loses focus
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mView.resume();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		mView.pause();
+	}
 }
-
