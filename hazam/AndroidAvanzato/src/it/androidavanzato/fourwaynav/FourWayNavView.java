@@ -64,11 +64,8 @@ public class FourWayNavView extends RSSurfaceView {
 		}
 	}
 	
-	public void rollLeft() {
-		mRender.rollLeft();
-	}
-	
 	public void roll(Roll roll) {
 		mRender.roll( roll );
+		mRender.rollLeft();
 	}
 }
