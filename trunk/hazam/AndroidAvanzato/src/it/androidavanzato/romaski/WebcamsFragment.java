@@ -45,7 +45,7 @@ public class WebcamsFragment extends ListFragment {
 		PinchableImageFragment newWebFragment = new PinchableImageFragment();
 		Uri targetUri =(Uri) mAdapter.getItem(pos);
 		Bundle arg = new Bundle();
-		arg.putParcelable("uri", targetUri);
+		arg.putParcelable("uri", Uri.parse(targetUri.toString() +"#big"));
 		newWebFragment.setArguments(arg);
 		ft = getFragmentManager().beginTransaction();
 		ft.replace(R.id.detail_container, newWebFragment);
