@@ -45,6 +45,18 @@ public class ImageDownloader extends AsyncTaskLoader<Uri> {
 	private static void trace(String msg) {
 		Log.v(TAG, msg);
 	}
+
+	@Override
+	protected void onStartLoading() {
+		trace("onStartLoading");
+		forceLoad();
+	}
+
+	@Override
+	protected void onStopLoading() {
+		trace("onStopLoading");
+		cancelLoad();
+	}
 	
 	@Override
 	public Uri loadInBackground() {
@@ -98,17 +110,5 @@ public class ImageDownloader extends AsyncTaskLoader<Uri> {
 	private final boolean weAreOnline() {
 		final NetworkInfo ni = mConnectivityManager.getActiveNetworkInfo();
 		return ni != null && ni.isConnected();
-	}
-
-	@Override
-	protected void onStartLoading() {
-		trace("onStartLoading");
-		forceLoad();
-	}
-
-	@Override
-	protected void onStopLoading() {
-		trace("onStopLoading");
-		cancelLoad();
 	}
 }
