@@ -1,6 +1,5 @@
 package it.androidavanzato.fourwaynav;
 
-import android.graphics.Color;
 import android.renderscript.Float3;
 import android.renderscript.Mesh;
 import android.renderscript.RenderScriptGL;

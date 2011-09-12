@@ -111,4 +111,12 @@ public class ImageDownloader extends AsyncTaskLoader<Uri> {
 		final NetworkInfo ni = mConnectivityManager.getActiveNetworkInfo();
 		return ni != null && ni.isConnected();
 	}
+	
+	public Throwable getError() {
+		return error;
+	}
+	
+	public long getContentLength() {
+		return clength;
+	}
 }
