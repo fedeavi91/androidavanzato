@@ -34,34 +34,26 @@ public class FourWayHoneycombActivity extends Activity {
 		super.onCreate(icicle);
 		setContentView(R.layout.fourway);
 		mView = (FourWayNavView) findViewById(R.id.fourway);
-		mView.setOnTouchListener(new SwipeDetector(new Listener() {
+		mView.setOnTouchListener(new SwipeDetector(this, new Listener() {
 
 			@Override
 			public void onSwipeUp() {
 				mView.roll(Roll.DOWN);
-				Toast.makeText(FourWayHoneycombActivity.this, "onSwipeUp",
-						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeRight() {
 				mView.roll(Roll.LEFT);
-				Toast.makeText(FourWayHoneycombActivity.this, "onSwipeRight",
-						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeLeft() {
 				mView.roll(Roll.RIGHT);
-				Toast.makeText(FourWayHoneycombActivity.this, "onSwipeLeft",
-						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeDown() {
 				mView.roll(Roll.UP);
-				Toast.makeText(FourWayHoneycombActivity.this, "onSwipeDown",
-						Toast.LENGTH_SHORT).show();
 			}
 		}));
 	}

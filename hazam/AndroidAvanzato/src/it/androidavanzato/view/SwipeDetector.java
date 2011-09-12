@@ -1,5 +1,6 @@
 package it.androidavanzato.view;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,7 +9,10 @@ public class SwipeDetector implements View.OnTouchListener {
 
 	static final String logTag = "SwipeDetector";
 	private float downX, downY;
-
+	private final float THRESHOLD_MDPI = 150;
+	private float threshold = 0; 
+	
+	
 	public static interface Listener {
 		public void onSwipeLeft();
 
@@ -35,14 +39,12 @@ public class SwipeDetector implements View.OnTouchListener {
 
 	private Listener mListener = null;
 
-	public SwipeDetector(Listener listener) {
+	public SwipeDetector(Context ctx, Listener listener) {
 		this.mListener = listener;
+		this.threshold = THRESHOLD_MDPI * ctx.getResources().getDisplayMetrics().density;
 	}
 
 	public boolean onTouch(View v, MotionEvent event) {
-		final float xThreshold = v.getWidth() * 0.4f;
-		final float whoKnowsThreshold = Math.min(v.getWidth(), v.getHeight()) * 0.2f;
-		final float yThreshold = v.getHeight() * 0.4f;
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			downX = event.getX();
@@ -57,8 +59,7 @@ public class SwipeDetector implements View.OnTouchListener {
 			final float deltaY = downY - event.getY();
 
 			// swipe horizontal?
-			if (Math.abs(deltaX) > xThreshold
-					&& Math.abs(deltaY) < whoKnowsThreshold) {
+			if (Math.abs(deltaX) > threshold) {
 				// left or right
 				if (deltaX < 0) {
 					mListener.onSwipeRight();
@@ -68,12 +69,11 @@ public class SwipeDetector implements View.OnTouchListener {
 				return true;
 			} else {
 				Log.i(logTag, "Swipe was only " + Math.abs(deltaX)
-						+ " long, need at least " + xThreshold);
+						+ " long, need at least " + threshold);
 			}
 
 			// swipe vertical?
-			if (Math.abs(deltaY) > yThreshold
-					&& Math.abs(deltaX) < whoKnowsThreshold) {
+			if (Math.abs(deltaY) > threshold) {
 				// top or down
 				if (deltaY < 0) {
 					mListener.onSwipeDown();
@@ -83,7 +83,7 @@ public class SwipeDetector implements View.OnTouchListener {
 				return true;
 			} else {
 				Log.i(logTag, "Swipe was only " + Math.abs(deltaY)
-						+ " long, need at least " + yThreshold);
+						+ " long, need at least " + threshold);
 			}
 			return true;
 		}
