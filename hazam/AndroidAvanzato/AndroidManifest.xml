@@ -32,7 +32,7 @@
 		<activity android:name=".ui.ModalTextEditHoneycombActivity" />
 		<activity android:name=".ui.AnimatorHoneycombActivity" />
 		<activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
-		<activity android:name=".fourwaynav.NavActivity" />
+		<activity android:name=".fourwaynav.FourWayHoneycombActivity" />
 	</application>
 	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
 	<uses-permission android:name="android.permission.INTERNET" />
