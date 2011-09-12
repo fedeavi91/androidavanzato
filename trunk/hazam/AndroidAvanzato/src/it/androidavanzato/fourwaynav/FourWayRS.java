@@ -44,10 +44,6 @@ public class FourWayRS extends BaseRS<ScriptC_cube> {
 	protected ScriptC_cube createScriptC() {
 		return new ScriptC_cube(mRS, mRes, R.raw.cube);
 	}
-
-	public void rollLeft() {
-		mScriptC.invoke_rollLeft();
-	}
 	
 	public void roll(Roll r) {
 		mScriptC.invoke_rollTo(r.value);
