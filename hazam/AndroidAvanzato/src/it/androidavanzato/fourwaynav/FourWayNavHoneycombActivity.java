@@ -25,7 +25,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-public class NavActivity extends Activity {
+public class FourWayNavHoneycombActivity extends Activity {
 
 	private FourWayNavView mView;
 
@@ -39,28 +39,28 @@ public class NavActivity extends Activity {
 			@Override
 			public void onSwipeUp() {
 				mView.roll(Roll.DOWN);
-				Toast.makeText(NavActivity.this, "onSwipeUp",
+				Toast.makeText(FourWayNavHoneycombActivity.this, "onSwipeUp",
 						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeRight() {
 				mView.roll(Roll.LEFT);
-				Toast.makeText(NavActivity.this, "onSwipeRight",
+				Toast.makeText(FourWayNavHoneycombActivity.this, "onSwipeRight",
 						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeLeft() {
 				mView.roll(Roll.RIGHT);
-				Toast.makeText(NavActivity.this, "onSwipeLeft",
+				Toast.makeText(FourWayNavHoneycombActivity.this, "onSwipeLeft",
 						Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onSwipeDown() {
 				mView.roll(Roll.UP);
-				Toast.makeText(NavActivity.this, "onSwipeDown",
+				Toast.makeText(FourWayNavHoneycombActivity.this, "onSwipeDown",
 						Toast.LENGTH_SHORT).show();
 			}
 		}));
