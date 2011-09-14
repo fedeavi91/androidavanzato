@@ -5,7 +5,7 @@
 //deve essere uguale al package dell'applicazione
 #pragma rs java_package_name(it.androidavanzato.fourwaynav)
 
-//includere le pimitive di grafica. Verra' inclusa anche rs_math.rsh
+//includere le primitive di grafica. Verra' inclusa anche rs_math.rsh
 #include "rs_graphics.rsh"
 
 rs_program_vertex programVertex;

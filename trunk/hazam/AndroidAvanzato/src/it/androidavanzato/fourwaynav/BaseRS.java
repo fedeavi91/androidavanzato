@@ -46,8 +46,4 @@ public abstract class BaseRS<T extends ScriptC> {
                                            Allocation.MipmapControl.MIPMAP_ON_SYNC_TO_TEXTURE,
                                            Allocation.USAGE_GRAPHICS_TEXTURE);
 	}
-
-	public static float byteToChannel(int colchan) {
-		return colchan * (1.0f / 255);
-	}
 }

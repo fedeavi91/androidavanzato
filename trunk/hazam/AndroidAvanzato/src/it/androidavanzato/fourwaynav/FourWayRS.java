@@ -32,9 +32,7 @@ public class FourWayRS extends BaseRS<ScriptC_cube> {
 		((ProgramVertexFixedFunction) mProgVertex).bindConstants(mPVA);
 		Matrix4f proj = new Matrix4f();
 		proj.loadPerspective(90.0f, ((float) mRS.getWidth()) / mRS.getHeight(), 0.1f, 500.0f);
-		// proj.loadOrthoWindow(500, 500);
-		// proj.loadProjectionNormalized(mRS.getWidth(),mRS.getHeight());
-		// proj.loadFrustum(0, 500, 500, 0, 1.0f, 10.0f);
+		
 		mPVA.setProjection(proj);
 		mScriptC.set_programVertex(mProgVertex);
 		mRS.bindProgramVertex(mProgVertex);
