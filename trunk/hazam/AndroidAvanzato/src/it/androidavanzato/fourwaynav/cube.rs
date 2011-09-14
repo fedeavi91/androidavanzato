@@ -45,7 +45,7 @@ void init() {
 int root(int launchID) {
 	// Clear the background color
 	rsgClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	rsgClearDepth(100.0f);
+	rsgClearDepth(1000.0f);
 	rsgBindProgramVertex(programVertex);
 	rsgBindProgramFragment(programFragment);
 	rsgBindProgramStore(programStore);
