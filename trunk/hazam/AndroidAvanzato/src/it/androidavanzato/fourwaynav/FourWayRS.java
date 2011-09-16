@@ -12,7 +12,11 @@ import android.renderscript.ProgramVertexFixedFunction;
 import android.renderscript.ProgramVertexFixedFunction.Constants;
 import android.renderscript.Sampler;
 
-// This is the renderer for the HelloWorldView
+/**
+ * 
+ * @author Emanuele Di Saverio (emanuele.di.saverio at frogdesign.com )
+ *
+ */
 public class FourWayRS extends BaseRS<ScriptC_cube> {
 	
 	private ProgramVertexFixedFunction mProgVertex;
