@@ -13,7 +13,7 @@ rs_program_fragment programFragment;
 rs_program_store programStore;
 rs_mesh cubeMesh;
 
-float overshootInterpolator(float t) {
+static float overshootInterpolator(float t) {
 	t -= 1.0f;
 	return t * t * (3.0 * t + 2.0) + 1.0f;
 }

@@ -33,6 +33,7 @@
 		<activity android:name=".ui.AnimatorHoneycombActivity" />
 		<activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
 		<activity android:name=".fourwaynav.FourWayHoneycombActivity" />
+		<activity android:name=".androboxe.BoxeActivity" />
 	</application>
 	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
 	<uses-permission android:name="android.permission.INTERNET" />
