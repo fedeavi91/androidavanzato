@@ -1,41 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="it.androidavanzato" android:versionCode="1"
-	android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="11"/>
+    package="it.androidavanzato"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:hardwareAccelerated="true" android:name=".AndroidAvanzatoApplication">
-		<activity android:name=".BookExamples"
-			android:alwaysRetainTaskState="true" android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-		</activity>
-		<activity android:name=".romaski.RomaSkiHoneycombActivity" android:theme="@style/RomaSki"/>
-		<activity android:name=".ui.NiceButton" />
-		<activity android:name=".ui.BitmapReflection" />
-		<activity android:name=".ui.ColorFilters" />
-		<activity android:name=".ui.Rotate" />
-		<activity android:name=".ui.Task1" android:taskAffinity="it.androidavanzato.one" />
-		<activity android:name=".ui.Task2" android:taskAffinity="it.androidavanzato.one" />
-		<activity android:name=".ui.Task3" android:taskAffinity="it.androidavanzato.two"
-			android:launchMode="singleTask" />
-		<activity android:name=".ui.Task4" android:taskAffinity="it.androidavanzato.two"
-			android:launchMode="singleTask" />
-		<activity android:name=".ui.LongTask" />
-		<activity android:name=".ui.KnobCustomViewActivity" />
-		<activity android:name=".ui.MessengerPipe" />
-		<service android:name=".ui.FactorialService" />
-		<activity android:name=".ui.BlinkingText" />
-		<activity android:name=".ui.ModalTextEditHoneycombActivity" />
-		<activity android:name=".ui.AnimatorHoneycombActivity" />
-		<activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
-		<activity android:name=".fourwaynav.FourWayHoneycombActivity" />
-		<activity android:name=".androboxe.BoxeActivity" />
-	</application>
-	<uses-permission android:name="android.permission.INJECT_EVENTS"/>
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-sdk
+        android:minSdkVersion="4"
+        android:targetSdkVersion="11" />
+
+    <application
+        android:name=".AndroidAvanzatoApplication"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".BookExamples"
+            android:alwaysRetainTaskState="true"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".romaski.RomaSkiHoneycombActivity"
+            android:theme="@style/RomaSki" />
+        <activity android:name=".ui.NiceButton" />
+        <activity android:name=".ui.BitmapReflection" />
+        <activity android:name=".ui.ColorFilters" />
+        <activity android:name=".ui.Rotate" />
+        <activity
+            android:name=".ui.Task1"
+            android:taskAffinity="it.androidavanzato.one" />
+        <activity
+            android:name=".ui.Task2"
+            android:taskAffinity="it.androidavanzato.one" />
+        <activity
+            android:name=".ui.Task3"
+            android:launchMode="singleTask"
+            android:taskAffinity="it.androidavanzato.two" />
+        <activity
+            android:name=".ui.Task4"
+            android:launchMode="singleTask"
+            android:taskAffinity="it.androidavanzato.two" />
+        <activity android:name=".ui.LongTask" />
+        <activity android:name=".ui.KnobCustomViewActivity" />
+        <activity android:name=".ui.MessengerPipe" />
+
+        <service android:name=".ui.FactorialService" />
+
+        <activity android:name=".ui.BlinkingText" />
+        <activity android:name=".ui.ModalTextEditHoneycombActivity" />
+        <activity android:name=".ui.AnimatorHoneycombActivity" />
+        <activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
+        <activity android:name=".fourwaynav.FourWayHoneycombActivity" />
+        <activity android:name=".androboxe.BoxeActivity" />
+        <activity android:name=".easters.ICSCalendarAPI" />
+
+        <provider android:name=".easters.DummyProvider"
+            android:authorities="it.androidavanzato.easters" >
+        </provider>
+
+        <service android:name=".easters.ICSEasterSyncService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+    </application>
+
+    <uses-permission android:name="android.permission.INJECT_EVENTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
 </manifest>

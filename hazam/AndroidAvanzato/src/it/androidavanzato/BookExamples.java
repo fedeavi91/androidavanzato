@@ -2,6 +2,7 @@ package it.androidavanzato;
 
 
 import it.androidavanzato.androboxe.BoxeActivity;
+import it.androidavanzato.easters.ICSCalendarAPI;
 import it.androidavanzato.fourwaynav.FourWayHoneycombActivity;
 import it.androidavanzato.romaski.RomaSkiHoneycombActivity;
 import it.androidavanzato.ui.AnimatorHoneycombActivity;
@@ -54,7 +55,8 @@ public class BookExamples extends ListActivity {
 			AnimatorHoneycombActivity.class,
 			ComplexAnimatorHoneycombActivity.class,
 			FourWayHoneycombActivity.class,
-			BoxeActivity.class
+			BoxeActivity.class,
+			ICSCalendarAPI.class
 	};
 
 	@Override
