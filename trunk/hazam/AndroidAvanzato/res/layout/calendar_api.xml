@@ -3,6 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createLocalEastersCalendar"
+        android:text="Create Local Easters Calendar" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="deleteLocalEastersCalendar"
+        android:text="Delete Local Easters Calendar" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="insertEastersUntil2020"
+        android:text="Insert All Easters Until 2020" />
 
 </LinearLayout>

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="4"
-        android:targetSdkVersion="11" />
+        android:targetSdkVersion="15" />
 
     <application
         android:name=".AndroidAvanzatoApplication"
@@ -56,20 +56,9 @@
         <activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
         <activity android:name=".fourwaynav.FourWayHoneycombActivity" />
         <activity android:name=".androboxe.BoxeActivity" />
-        <activity android:name=".easters.ICSCalendarAPI" />
 
-        <provider android:name=".easters.DummyProvider"
-            android:authorities="it.androidavanzato.easters" >
-        </provider>
+        <activity android:name=".easters.ICSCalendarAPI" android:screenOrientation="portrait"/>
 
-        <service android:name=".easters.ICSEasterSyncService"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.content.SyncAdapter" />
-            </intent-filter>
-            <meta-data android:name="android.content.SyncAdapter"
-                android:resource="@xml/syncadapter" />
-        </service>
     </application>
 
     <uses-permission android:name="android.permission.INJECT_EVENTS" />

@@ -1,9 +1,10 @@
 package it.androidavanzato.easters;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.Map.Entry;
+import java.util.TimeZone;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -14,6 +15,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.util.Log;
 
 public class CalendarQueryHelper {
@@ -55,10 +57,21 @@ public class CalendarQueryHelper {
 		return newCalendar;
 	}
 	
-	public static Uri createLocalCalendarWithName(Context ctx, String name) {
+	public static Uri ensureLocalCalendarWithName(Context ctx, String name) {
+		Uri query = CalendarContract.Calendars.CONTENT_URI;
 		
-		Uri target = Uri.parse(CalendarContract.Calendars.CONTENT_URI.toString());
-		target = target.buildUpon().appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, Boolean.TRUE.toString())
+		Cursor c = ctx.getContentResolver().query(query, null, Calendars.NAME+"=?", new String[] { name }, null);
+		long id = -1;
+		if (c.moveToNext()) {
+			id = c.getLong(c.getColumnIndex(Calendars._ID));
+		}
+		c.close();
+		if (id > 0) {
+			return query.buildUpon().appendPath(Long.toString(id)).build();
+		}
+		
+		
+		Uri target = CalendarContract.Calendars.CONTENT_URI.buildUpon().appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, Boolean.TRUE.toString())
 		.appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, "dummyAccount")
 		.appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL).build();
 		
@@ -81,16 +94,30 @@ public class CalendarQueryHelper {
 		return newCalendar;
 	}
 	
-	public static int deleteCalendarWithId(Context ctx, long id) {
+	public static int deleteCalendarWithName(Context ctx, String name) {
 		
 		Uri target = Uri.parse(CalendarContract.Calendars.CONTENT_URI.toString());
-		target = target.buildUpon().appendPath(id+"")
+		target = target.buildUpon()
 		.appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL).build();
 		
-		return ctx.getContentResolver().delete(target, null, null);
+		return ctx.getContentResolver().delete(target, Calendars.NAME+"=?", new String[] { name });
 	}
 	
-	public static void dumpCalendars(Context ctx) {
+	public static Uri createEventWithName(Context ctx, Uri calendar, String name, Date at) {
+		long id = Long.parseLong(calendar.getLastPathSegment());
+		ContentValues cv = new ContentValues();
+		cv.put(Events.TITLE, name);
+		cv.put(Events.DTSTART, at.getTime());
+		cv.put(Events.DTEND, at.getTime() + 1000000);
+		cv.put(Events.CALENDAR_ID, id);
+		cv.put(Events.EVENT_TIMEZONE, TimeZone.getDefault().toString());
+		//cv.put(Events.RRULE, "FREQ=DAILY;INTERVAL=2");
+		
+		Uri newEvent = ctx.getContentResolver().insert(CalendarContract.Events.CONTENT_URI, cv);
+		return newEvent;
+	}
+	
+ 	public static void dumpCalendars(Context ctx) {
 		ContentResolver cr = ctx.getContentResolver();
 		Cursor c = cr.query(CalendarContract.Calendars.CONTENT_URI, null, null, null, null);
 		Map<String, String> list = new HashMap<String,String>();
@@ -99,7 +126,7 @@ public class CalendarQueryHelper {
 			list.put(Calendars.NAME, c.getString(c.getColumnIndex(Calendars.NAME)));
 			/*list.put(Calendars.ACCOUNT_NAME, c.getString(c.getColumnIndex(Calendars.ACCOUNT_NAME)));
 			list.put(Calendars.ACCOUNT_TYPE, c.getString(c.getColumnIndex(Calendars.ACCOUNT_TYPE)));
-			//inseriamo lo stesso valore nome e display name per semplicita
+			
 			list.put(Calendars.NAME, c.getString(c.getColumnIndex(Calendars.NAME)));
 			list.put(Calendars.CALENDAR_DISPLAY_NAME, c.getString(c.getColumnIndex(Calendars.CALENDAR_DISPLAY_NAME)));
 			
@@ -137,10 +164,11 @@ public class CalendarQueryHelper {
 			list.put(Calendars.CAL_SYNC9,c.getString(c.getColumnIndex(Calendars.CAL_SYNC9)));
 			list.put(Calendars.CAL_SYNC10,c.getString(c.getColumnIndex(Calendars.CAL_SYNC10)));*/
 
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder("--CALENDAR DUMP--");
 			for (Entry<String, String> s: list.entrySet()) {
 				sb.append("("+s.getKey()+"|"+s.getValue()+")");
 			}
+			sb.append("----------");
 			Log.i(C.TAG, sb.toString());
 			list.clear();
 		}

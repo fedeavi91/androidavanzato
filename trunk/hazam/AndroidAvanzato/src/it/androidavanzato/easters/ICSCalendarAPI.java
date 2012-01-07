@@ -1,36 +1,40 @@
 package it.androidavanzato.easters;
 
+import it.androidavanzato.R;
+
 import java.util.Calendar;
 import java.util.Date;
 
-import it.androidavanzato.R;
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.util.Log;
+import android.view.View;
 
 public class ICSCalendarAPI extends Activity {
+	
+	private Uri mTargetCalendar = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.calendar_api);
-		//insertViaContentResolver();
-		//queryCalendars();
-		//deleteCalendars();
-		//queryCalendars();
-		//AccountManager.get(this).addAccountExplicitly(new Account("dumb", "it.androidvanzato"), "pippo", new Bundle());
-		Log.i("AndroidAvanzato", Easter.forYear(2040).toString());
-		CalendarQueryHelper.createLocalCalendarWithName(this, "Easters");
+	}
+	
+	public void createLocalEastersCalendar(View v) {
+		mTargetCalendar = CalendarQueryHelper.ensureLocalCalendarWithName(this, "Easters");
 		CalendarQueryHelper.dumpCalendars(this);
-		//CalendarQueryHelper.deleteCalendarWithId(this, 2);
+	}
+	
+	public void deleteLocalEastersCalendar(View v) {
+		CalendarQueryHelper.deleteCalendarWithName(this, "Easters");
 		CalendarQueryHelper.dumpCalendars(this);
+	}
+	
+	public void insertEastersUntil2020(View v) {
+		for (int i = 2012; i <= 2012; i++) {
+			Date d = Easter.forYear(i);
+			CalendarQueryHelper.createEventWithName(this, mTargetCalendar, "Pasqua!", d);
+		}
 	}
 	
 	@Override
