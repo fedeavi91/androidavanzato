@@ -13,13 +13,21 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="deleteLocalEastersCalendar"
-        android:text="Delete Local Easters Calendar" />
-
+        android:onClick="insertEastersUntil2020"
+        android:text="Insert All Easters Until 2020" />
+    
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="insertEastersUntil2020"
-        android:text="Insert All Easters Until 2020" />
+        android:onClick="deleteLocalEastersCalendar"
+        android:text="Delete Local Easters Calendar" />
 
+    <Space android:layout_width="match_parent" android:layout_height="40dp"/>
+    
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="calendarAppIntegration"
+        android:text="Insert next Easter via Calendar App" />
+    
 </LinearLayout>

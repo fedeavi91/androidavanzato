@@ -33,7 +33,8 @@ public class ICSCalendarAPI extends Activity {
 	public void insertEastersUntil2020(View v) {
 		for (int i = 2012; i <= 2012; i++) {
 			Date d = Easter.forYear(i);
-			CalendarQueryHelper.createEventWithName(this, mTargetCalendar, "Pasqua!", d);
+			Uri event = CalendarQueryHelper.createEventWithName(this, mTargetCalendar, "Pasqua!", d);
+			CalendarQueryHelper.addAttendeeToEvent(this, event, "Mamma", "sara.rossi@gmail.com");
 		}
 	}
 	
