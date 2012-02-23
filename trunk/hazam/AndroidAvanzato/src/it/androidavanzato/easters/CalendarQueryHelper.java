@@ -14,6 +14,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 import android.util.Log;
@@ -114,6 +115,17 @@ public class CalendarQueryHelper {
 		//cv.put(Events.RRULE, "FREQ=DAILY;INTERVAL=2");
 		
 		Uri newEvent = ctx.getContentResolver().insert(CalendarContract.Events.CONTENT_URI, cv);
+		return newEvent;
+	}
+	
+	public static Uri addAttendeeToEvent(Context ctx, Uri calendar, String name, String email) {
+		long id = Long.parseLong(calendar.getLastPathSegment());
+		ContentValues cv = new ContentValues();
+		cv.put(Attendees.ATTENDEE_NAME, name);
+		cv.put(Attendees.ATTENDEE_EMAIL, email);
+		cv.put(Attendees.EVENT_ID, id);
+		
+		Uri newEvent = ctx.getContentResolver().insert(CalendarContract.Attendees.CONTENT_URI, cv);
 		return newEvent;
 	}
 	
