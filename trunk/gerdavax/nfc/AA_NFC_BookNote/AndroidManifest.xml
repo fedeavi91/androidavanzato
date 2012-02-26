@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="it.androidavanzato.nfc.booknote"
+	android:versionCode="1"
+	android:versionName="1.0.0">
+
+	<application
+		android:icon="@drawable/icon"
+		android:label="@string/app_name">
+
+		<activity
+			android:name=".BookNote"
+			android:label="BookNote"
+			android:windowSoftInputMode="stateHidden">
+			<intent-filter>
+				<action
+					android:name="android.intent.action.MAIN" />
+				<category
+					android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+
+			<intent-filter>
+				<action
+					android:name="android.intent.action.SEND" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+				<data
+					android:mimeType="text/plain" />
+			</intent-filter>
+
+<!-- Se non si mette la categoria default il dispatching non avviene!!!!  -->
+			<intent-filter>
+				<action
+					android:name="android.nfc.action.NDEF_DISCOVERED" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+		 		<data
+					android:mimeType="text/plain" /> 
+			</intent-filter>
+			
+			<intent-filter>
+				<action
+					android:name="android.nfc.action.NDEF_DISCOVERED" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+				<data
+					android:scheme="http" android:host="www.ttag.be" android:pathPrefix="/m/"/>
+			</intent-filter>
+
+
+			<intent-filter>
+				<action
+					android:name="android.nfc.action.TECH_DISCOVERED" />
+				</intent-filter>
+
+			<meta-data
+				android:name="android.nfc.action.TECH_DISCOVERED"
+				android:resource="@xml/nfc_tech_filter" />
+		</activity>
+
+	</application>
+
+	<uses-sdk
+		android:minSdkVersion="10" />
+	<uses-permission
+		android:name="android.permission.NFC" />
+	<uses-feature
+		android:name="android.hardware.nfc"
+		android:required="false" />
+</manifest>
