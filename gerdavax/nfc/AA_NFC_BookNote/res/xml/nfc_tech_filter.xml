@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources
+	xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+	<!-- Se non mettiamo NDef qui, l'applicazione non sara' in grado di
+	gestire un tag vuoto!!! -->
+	<tech-list>
+		<tech>android.nfc.tech.Ndef</tech>
+	</tech-list>
+	<tech-list>
+		<tech>android.nfc.tech.NdefFormatable</tech>
+	</tech-list>
+</resources>
