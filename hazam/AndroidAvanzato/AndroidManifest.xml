@@ -56,9 +56,13 @@
         <activity android:name=".ui.ComplexAnimatorHoneycombActivity" />
         <activity android:name=".fourwaynav.FourWayHoneycombActivity" />
         <activity android:name=".androboxe.BoxeActivity" />
+        <activity
+            android:name=".easters.ICSCalendarAPI"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.CustomViewActivity" />
+        <activity android:name=".ui.FloatingButton" />
 
-        <activity android:name=".easters.ICSCalendarAPI" android:screenOrientation="portrait"/>
-
+        <service android:name=".ui.FloatingButtonService" />
     </application>
 
     <uses-permission android:name="android.permission.INJECT_EVENTS" />
@@ -67,5 +71,6 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 </manifest>

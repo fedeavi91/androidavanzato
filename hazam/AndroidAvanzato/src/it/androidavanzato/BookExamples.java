@@ -10,6 +10,8 @@ import it.androidavanzato.ui.BitmapReflection;
 import it.androidavanzato.ui.BlinkingText;
 import it.androidavanzato.ui.ColorFilters;
 import it.androidavanzato.ui.ComplexAnimatorHoneycombActivity;
+import it.androidavanzato.ui.CustomViewActivity;
+import it.androidavanzato.ui.FloatingButton;
 import it.androidavanzato.ui.KnobCustomViewActivity;
 import it.androidavanzato.ui.LongTask;
 import it.androidavanzato.ui.MessengerPipe;
@@ -56,7 +58,9 @@ public class BookExamples extends ListActivity {
 			ComplexAnimatorHoneycombActivity.class,
 			FourWayHoneycombActivity.class,
 			BoxeActivity.class,
-			ICSCalendarAPI.class
+			ICSCalendarAPI.class,
+			CustomViewActivity.class,
+			FloatingButton.class
 	};
 
 	@Override
