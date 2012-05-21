@@ -29,19 +29,20 @@ public class RomaSkiHoneycombActivity extends Activity implements
 		setContentView(R.layout.home);
 
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.setTitle("HC Romaski");
-		actionBar.setSubtitle("Applicazione d'esempio");
+		if (actionBar != null) {
+			actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+			actionBar.setTitle("HC Romaski");
+			actionBar.setSubtitle("Applicazione d'esempio");
 
-		mFromMachine = true;
-		for (Resort r : Resort.ALL.values()) {
-			Tab toadd = actionBar.newTab().setTag(r.getId())
-					.setIcon(r.getDrawableId()).setTabListener(this);
-			actionBar.addTab(toadd);
-			mTagTagMap.put(r.getId(), toadd);
+			mFromMachine = true;
+			for (Resort r : Resort.ALL.values()) {
+				Tab toadd = actionBar.newTab().setTag(r.getId())
+						.setIcon(r.getDrawableId()).setTabListener(this);
+				actionBar.addTab(toadd);
+				mTagTagMap.put(r.getId(), toadd);
+			}
+			mFromMachine = false;
 		}
-		mFromMachine = false;
-		
 		switchToTab(Resort.CAMPO_FELICE.getId(), getFragmentManager()
 				.beginTransaction(), true);
 
@@ -70,11 +71,14 @@ public class RomaSkiHoneycombActivity extends Activity implements
 			switchToTab(tag, ft, true);
 		}
 	}
-	
+
 	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	}
+
 	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,7 +116,9 @@ public class RomaSkiHoneycombActivity extends Activity implements
 					+ getFragmentManager().getBackStackEntryAt(lastPosition)
 							.getBreadCrumbTitle();
 			mFromMachine = true;
-			getActionBar().selectTab(mTagTagMap.get(tag));
+			if (getActionBar() != null) {
+				getActionBar().selectTab(mTagTagMap.get(tag));
+			}
 			mFromMachine = false;
 		} else {
 			finish();
